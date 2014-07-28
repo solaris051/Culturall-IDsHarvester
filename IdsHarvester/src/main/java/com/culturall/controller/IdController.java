@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.culturall.service.IdService;
 
-//I added this @nnotation in order to check whether the GitHub works
 @Controller
 public class IdController {
 	
