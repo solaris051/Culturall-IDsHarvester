@@ -16,14 +16,14 @@ public class IdController {
 	@RequestMapping(value="home")
 	public String home(Model model) {
 		System.out.println("message from Roster/home");
-		model.addAttribute("arg", "message from Home " + idService.getValue());
+		model.addAttribute("arg", "Message from Home " + idService.getValue());
 		return "home";
 	}
 	
 	@RequestMapping(value="home2")
 	public String home2(Model model) {
 		System.out.println("message from Roster/home2");
-		model.addAttribute("arg", "message form Home2 " + idService.getValue());
+		model.addAttribute("arg", "Message form Home2 " + idService.getValue());
 		return "home";
 	}
 }
