@@ -1,8 +1,6 @@
 package com.culturall.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -26,7 +24,7 @@ public class TranslateId {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	//@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getTransId() {
 		return transId;
 	}

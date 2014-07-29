@@ -21,29 +21,24 @@ public class IdDao {
 	
 	public String getValue() {
 
-/*		
 		Page page = new Page();
 		page.setScreenShot("some screenshot");
 		page.setUrl("www.maps.google.com");
-		page.setIds(translateIds);
-*/	
-		Session session = this.getSession();
-//		session.save(page);
-
-//insert Id into page	
-		Query query = session.getNamedQuery(Page.findPageByUrl).setString("url", "www.meta.ua");
-		Page pageMatch = (Page) query.uniqueResult();
-		
+	
 		TranslateId tId = new TranslateId();
 		tId.setText("bla-bla");
 		tId.setTransId(123456L);
-		
-		System.out.println("ids on page " + pageMatch.getIds().size());
-		pageMatch.getIds().add(tId);
+		tId.setPage(page);
 
-		session.update(pageMatch);
+		page.getIds().add(tId);
 		
-//end
+		System.out.println("size is " + page.getIds().size());
+		
+		Page pageMatch = null;
+		
+		Session session = this.getSession();
+		session.save(page);
+		
 		return this.value + ((pageMatch != null) ? (" <strong>" + pageMatch.getUrl() + "</strong>") : "");
 	}
 	
@@ -55,3 +50,6 @@ public class IdDao {
 		}
 	}
 }
+
+
+/*http://viralpatel.net/blogs/hibernate-one-to-many-annotation-tutorial/*/

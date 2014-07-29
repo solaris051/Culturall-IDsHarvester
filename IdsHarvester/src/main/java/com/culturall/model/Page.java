@@ -1,5 +1,6 @@
 package com.culturall.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -23,7 +24,7 @@ public class Page {
 	public static final String findPageByUrl = "Page.findPageByUrl";
 
 	private Long pageId;
-	private List<TranslateId> ids;
+	private List<TranslateId> ids = new ArrayList<TranslateId>();
 	private String screenShot;
 	private String url;
 	
