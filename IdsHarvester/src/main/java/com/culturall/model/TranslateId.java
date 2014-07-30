@@ -1,12 +1,18 @@
 package com.culturall.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="translate_ids")
 public class TranslateId {
 
+	private Long id;
 	private Long transId;
 	private Page page;
 	private String text;
@@ -16,15 +22,25 @@ public class TranslateId {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TranslateId(Long transId, Page page, String text) {
+	public TranslateId(Long id, Long transId, Page page, String text) {
 		super();
+		this.id = id;
 		this.transId = transId;
 		this.page = page;
 		this.text = text;
 	}
 
 	@Id
-	//@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
+	public Long getId() {
+		return this.id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	@Column(name="tr_id")
 	public Long getTransId() {
 		return transId;
 	}
@@ -34,6 +50,7 @@ public class TranslateId {
 	}
 
 	@ManyToOne
+	@JoinColumn(name="page_id")
 	public Page getPage() {
 		return page;
 	}
@@ -42,6 +59,7 @@ public class TranslateId {
 		this.page = page;
 	}
 
+	@Column(name="tr_text")
 	public String getText() {
 		return text;
 	}

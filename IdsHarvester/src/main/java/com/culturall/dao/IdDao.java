@@ -1,6 +1,5 @@
 package com.culturall.dao;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +22,13 @@ public class IdDao {
 
 		Page page = new Page();
 		page.setScreenShot("some screenshot");
-		page.setUrl("www.maps.google.com");
+		page.setUrl("www.maps.google.us");
 	
 		TranslateId tId = new TranslateId();
 		tId.setText("bla-bla");
 		tId.setTransId(123456L);
+		
+		//???
 		tId.setPage(page);
 
 		page.getIds().add(tId);

@@ -1,19 +1,21 @@
 package com.culturall.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @Entity
+@Table(name="pages")
 @NamedQueries({
 	@NamedQuery(name=Page.findAll, query="SELECT p FROM Page p ORDER by p.url"),
 	@NamedQuery(name=Page.findPageByUrl, query="SELECT p FROM Page p WHERE p.url = :url")
@@ -24,7 +26,7 @@ public class Page {
 	public static final String findPageByUrl = "Page.findPageByUrl";
 
 	private Long pageId;
-	private List<TranslateId> ids = new ArrayList<TranslateId>();
+	private Set<TranslateId> ids = new HashSet<TranslateId>();
 	private String screenShot;
 	private String url;
 	
@@ -33,7 +35,7 @@ public class Page {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Page(Long pageId, List<TranslateId> ids, String screenShot,
+	public Page(Long pageId, Set<TranslateId> ids, String screenShot,
 			String url) {
 		super();
 		this.pageId = pageId;
@@ -43,7 +45,8 @@ public class Page {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
+	@Column(name="page_id")
 	public Long getPageId() {
 		return pageId;
 	}
@@ -52,17 +55,16 @@ public class Page {
 		this.pageId = pageId;
 	}
 
-	@OneToMany(mappedBy="page")
-	@Column(name="translateIds")
-	public List<TranslateId> getIds() {
+	@OneToMany(mappedBy="page", cascade=CascadeType.ALL)
+	public Set<TranslateId> getIds() {
 		return ids;
 	}
 
-	public void setIds(List<TranslateId> ids) {
+	public void setIds(Set<TranslateId> ids) {
 		this.ids = ids;
 	}
 
-	
+	@Column(name="screenshot")
 	public String getScreenShot() {
 		return screenShot;
 	}
@@ -70,7 +72,8 @@ public class Page {
 	public void setScreenShot(String screenShot) {
 		this.screenShot = screenShot;
 	}
-
+	
+	@Column(name="url")
 	public String getUrl() {
 		return url;
 	}
