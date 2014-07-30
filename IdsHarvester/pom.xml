@@ -90,6 +90,28 @@
 		</dependency>
 		
 		<!-- DB seems to be Ok -->
+		
+		<!-- Selenium Aspect -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.39.0</version>
+		</dependency>
+		
+		<!-- for Worker Bean -->
+<!--   	This is pure Java EE, so I'll have to find the Srping workaround    
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency> -->
+		<!--  -->
+		
 	</dependencies>
 	
 </project>
