@@ -20,7 +20,7 @@ $(document).on("click", "#translateIdSearch", function() {
 		    type: 'GET',
 		    dataType: 'text',
 		    success: function(result) {
-//		    	console.log("in success block");
+//		    	console.log("in success block");;
 		    }
 		});
 	}
