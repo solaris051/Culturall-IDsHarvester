@@ -16,21 +16,18 @@ import com.culturall.selenium.util.CultUtils;
 
 public class Harvester {
 	
-	private Logger logger = Logger.getLogger(TestLauncher.class.getName());
-	
+	private Logger logger = Logger.getLogger(TestLauncher.class.getName());	
 	private FirefoxDriver driver = new FirefoxDriver();
 	
 	public static void main(String[] args) throws InterruptedException {
 		Harvester harvester = new Harvester();
-		Set<String> totalIds = new HashSet<String>();
-				
-		Set<String> pagesToVisit = harvester.getPageList();
+		Set<String> totalIds = new HashSet<String>();		
+		Set<String> pagesToVisit = harvester.getPageSet();
 		for (String s: pagesToVisit) {
 			totalIds.addAll(harvester.getTransIds(s));
 		}		
 		
 		System.out.println("totally IDs found: <<" + totalIds.size() + ">>");
-		
 		//close browser
 		harvester.driver.close();
 	}
@@ -59,8 +56,8 @@ public class Harvester {
 		return driver.getCurrentUrl();	
 	}
 	
-	//extracts IDs from the page
-	private Set<String> getTransIds(String url) throws InterruptedException {
+	//extracts IDs from specific page
+	public Set<String> getTransIds(String url) throws InterruptedException {
 
 		//set to language_debug=1;
 		Thread.sleep(5000L);
@@ -97,7 +94,8 @@ public class Harvester {
 		return translateIdSet;
 	}
 	
-	private Set<String> getPageList () {
+	//list of pages to harvest id's at
+	public Set<String> getPageSet () {
 		Set<String> pageList = new HashSet<String>();
 	
 		//performances
@@ -111,12 +109,7 @@ public class Harvester {
 		pageList.add("https://www.culturall.com/ticket/btv/subscription/schedule.mc");
 		pageList.add("https://www.culturall.com/ticket/btv/performance_subscription.mc");
 		pageList.add("https://www.culturall.com/contact_form.mc");
-		
-		//Customer service
-/*		pageList.add("");
-		pageList.add("");
-		pageList.add("");*/
-		
+
 		return pageList;
 	}
 }

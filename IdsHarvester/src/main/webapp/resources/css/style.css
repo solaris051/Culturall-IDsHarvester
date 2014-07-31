@@ -1,0 +1,61 @@
+#bgContainer {
+	width: 100%;
+	height:100%;
+	background-color: white;
+}
+
+body {
+	margin: 0;
+}
+
+#siteContainer {
+	width: 900px;
+	height: inherit;
+	border: 1px solid grey;
+	background-color: ;
+	margin: 0 auto;
+}
+
+#headerContainer {
+	position: relative;
+	height: 50px;
+	width: inherit;
+	border-bottom: 1px solid grey;
+}
+
+#contentContainer {
+	background-color: ;
+	padding: 5px
+}
+
+#footerContainer {
+	color: white;
+   	background-color: #4B4B4B;
+    bottom: 0;
+    position: fixed;
+    width: inherit;
+}
+
+table#containerTable {
+	width: 100%;
+}
+
+table#containerTable tr td:FIRST-CHILD {
+	width: 24%
+}
+
+table#containerTable tr td:nth-child(2): {
+	width: 76%
+}
+
+input#translateIdInput {
+	width: 100px;
+}
+
+input#translateIdSearch {
+	height: 22px;
+}
+
+#harvesterButton {
+	
+}

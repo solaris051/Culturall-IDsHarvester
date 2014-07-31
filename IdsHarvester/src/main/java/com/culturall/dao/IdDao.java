@@ -1,5 +1,8 @@
 package com.culturall.dao;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +21,39 @@ public class IdDao {
 	
 	private String value = "def DAO value";
 	
+	
 	public String getValue() {
 
+		return this.value;
+	}
+	
+	private Session getSession() {
+		try {
+			return sessionFactory.getCurrentSession();
+		} catch (Exception e) {
+			return sessionFactory.openSession();
+		}
+	}
+	
+	public void persistIdsFromPage (Set<String> translateIds, String url) {
+		Page page = new Page();
+		page.setUrl(url);
+		
+		Set<TranslateId> idSet = new HashSet<TranslateId>();
+		for (String trId: translateIds) {
+			TranslateId itTrId = new TranslateId();
+			itTrId.setPage(page);
+			itTrId.setText("def. Text");
+			itTrId.setTransId(Long.parseLong(trId));
+			idSet.add(itTrId);
+		}
+		page.setIds(idSet);
+		this.getSession().save(page);
+	}
+	
+/*	
+	//for test purposes
+	private void writeToDb() {
 		Page pageMatch = null;
 		
 		Page page = new Page();
@@ -39,16 +73,7 @@ public class IdDao {
 
 		
 		Session session = this.getSession();
-		session.save(page);
-		
-		return this.value + ((pageMatch != null) ? (" <strong>" + pageMatch.getUrl() + "</strong>") : value);
+		session.save(page);		
 	}
-	
-	private Session getSession() {
-		try {
-			return sessionFactory.getCurrentSession();
-		} catch (Exception e) {
-			return sessionFactory.openSession();
-		}
-	}
+	*/
 }

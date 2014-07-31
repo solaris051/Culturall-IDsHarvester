@@ -3,7 +3,6 @@ package com.culturall.service;
 import java.util.logging.Logger;
 
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 public class HarvesterScheduler {
 	private static Logger logger = Logger.getLogger("Scheduler Bean");

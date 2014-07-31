@@ -1,10 +1,39 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page session="false" %>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
+	<script src="<c:url value="/resources/js/jquery-1.11.1.js"/>"></script>
+	<script src="<c:url value="/resources/js/home.js"/>"></script>
+</head>
 <body>
-	<h1>DB persistence Tester</h1>
- 
-	<h2>Persisting Entity...</h2>
-	${arg}
- 
+	<div id="bgContainer">
+		<div id="siteContainer">
+			<div id="headerContainer">
+				header container
+			</div>
+			<div id="contentContainer">
+				<table id="containerTable">
+					<tr id = "firstRow">
+						<td>
+							ID <input id="translateIdInput" type="text">
+							<%-- <input type="image" id="translateIdSearch"  src="<c:url value="/resources/images/searchButton.png"/>"> --%>
+							<button id="translateIdSearch">search</button>
+						</td>
+						<td>
+							URL <a id="translateIdLink">default</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="footerContainer">
+				Culturall 2014 <button id="harvesterButton">collect ids</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
