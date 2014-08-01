@@ -8,6 +8,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.culturall.dao.IdDao;
+import com.culturall.model.Page;
+import com.culturall.model.TranslateId;
 import com.culturall.selenium.Harvester;
 
 @Service
@@ -21,19 +23,37 @@ public class IdService {
 	public void harvestIds () {
 		System.out.println("in harvestIds method");
 		Harvester harvester = new Harvester();
-		Set<String> pageSet = harvester.getPageSet();
+		Set<String> urlSet = harvester.getPageSet();
+		Set<Page> pageSet = new HashSet<Page>();
 		
-		for (String url: pageSet) {
+		for (String url: urlSet) {
 			Set<String> idsSet = null;
 			try {
 				idsSet = harvester.getTransIds(url);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			};
 			
-			idDao.persistIdsFromPage(idsSet, url);
+			Page itPage = new Page();
+			itPage.setUrl(url);
+			itPage.setIds(new HashSet<TranslateId>());
+			
+			for (String curIdString: idsSet) {
+				TranslateId curId = new TranslateId();
+				curId.setTransId(Long.parseLong(curIdString));
+				curId.setText("def. text");
+				curId.setPage(itPage);
+				itPage.getIds().add(curId);
+			}
+			pageSet.add(itPage);
+			System.out.println("found " + itPage.getIds().size() + " ids on url " + itPage.getUrl());
 		}
+		
+		System.out.println("Total number of pages scanned: " + pageSet.size());
+		
+		idDao.persistPages(pageSet);
+		
 	}
 	
 /*	

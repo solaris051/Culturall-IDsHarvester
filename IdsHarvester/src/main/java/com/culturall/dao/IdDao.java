@@ -34,8 +34,18 @@ public class IdDao {
 			return sessionFactory.openSession();
 		}
 	}
+
+	public void persistPages (Set<Page> pageSet) {
+		Session session = this.getSession();
+		
+		for (Page p: pageSet) {
+			session.save(p);
+		}
+	}
 	
-	public void persistIdsFromPage (Set<String> translateIds, String url) {
+	//obsolete version
+/*	
+ 	public void persistIdsFromPage (Set<String> translateIds, String url) {
 		Page page = new Page();
 		page.setUrl(url);
 		
@@ -50,7 +60,7 @@ public class IdDao {
 		page.setIds(idSet);
 		this.getSession().save(page);
 	}
-	
+*/	
 /*	
 	//for test purposes
 	private void writeToDb() {

@@ -17,8 +17,7 @@ import org.hibernate.annotations.NamedQuery;
 @Entity
 @Table(name="pages")
 @NamedQueries({
-	@NamedQuery(name=Page.findAll, query="SELECT p FROM Page p ORDER by p.url"),
-	@NamedQuery(name=Page.findPageByUrl, query="SELECT p FROM Page p WHERE p.url = :url")
+	@NamedQuery(name=Page.findAll, query="SELECT p FROM Page p ORDER by p.url")
 })
 public class Page {
 	
@@ -73,7 +72,7 @@ public class Page {
 		this.screenShot = screenShot;
 	}
 	
-	@Column(name="url")
+	@Column(name="url", length=2000)
 	public String getUrl() {
 		return url;
 	}
