@@ -1,8 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page session="false" %>
-
+ --%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Home</title>
@@ -25,7 +26,7 @@
 							<button id="translateIdSearch">search</button>
 						</td>
 						<td>
-							URL <a id="translateIdLink">default</a>
+							URL:&nbsp;<a id="translateIdLink"></a>
 						</td>
 					</tr>
 				</table>

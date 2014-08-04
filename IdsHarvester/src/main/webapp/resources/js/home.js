@@ -6,7 +6,7 @@ var globalUrl = location.protocol + '//' + location.host + location.pathname;
 
 $(document).on("click", "#translateIdSearch", function() {
 	var translateId = $("#translateIdInput").val();
-	var requestUrl = globalUrl + "/" + translateId;
+	var requestUrl = globalUrl + translateId;
 	
 	console.log(requestUrl);
 	if (translateId == "") {
@@ -20,7 +20,8 @@ $(document).on("click", "#translateIdSearch", function() {
 		    type: 'GET',
 		    dataType: 'text',
 		    success: function(result) {
-//		    	console.log("in success block");;
+		    	$("#translateIdLink")[0].innerHTML = result;
+		    	$("#translateIdLink").attr("href", result);
 		    }
 		});
 	}

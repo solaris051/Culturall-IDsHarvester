@@ -8,10 +8,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
 @Table(name="translate_ids")
+@NamedQueries({
+	@NamedQuery(name="getTranslateIdById", query="SELECT t FROM TranslateId t WHERE t.transId = :tId")
+})
 public class TranslateId {
 
+	//public static final String getTranslateIdById = "TranslateId.getTranslateIdById";
+	
 	private Long id;
 	private Long transId;
 	private Page page;

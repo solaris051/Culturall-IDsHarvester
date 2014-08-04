@@ -17,12 +17,13 @@ import org.hibernate.annotations.NamedQuery;
 @Entity
 @Table(name="pages")
 @NamedQueries({
-	@NamedQuery(name=Page.findAll, query="SELECT p FROM Page p ORDER by p.url")
+	@NamedQuery(name=Page.findAll, query="SELECT p FROM Page p ORDER by p.url"),
+	@NamedQuery(name=Page.findPageById, query="SELECT p FROM Page p where p.pageId = :id")
 })
 public class Page {
 	
 	public static final String findAll = "Page.findAll";
-	public static final String findPageByUrl = "Page.findPageByUrl";
+	public static final String findPageById = "Page.findPageById";
 
 	private Long pageId;
 	private Set<TranslateId> ids = new HashSet<TranslateId>();

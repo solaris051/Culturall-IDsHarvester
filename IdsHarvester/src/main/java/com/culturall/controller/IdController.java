@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.culturall.service.IdService;
 
@@ -20,17 +21,34 @@ public class IdController {
 		System.out.println("doer doing...");
 		return "home";
 	}
-
+/*
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public String findPageById(@PathVariable String id, Model model) {
 		Integer idForLookUp = null;
 		try {
-			System.out.println("processing request " + id);
 			idForLookUp = Integer.parseInt(id);
+			String matchedUrl = idService.getUrlByTranslateId(Long.parseLong(id));
+			model.addAttribute("matchedUrl", matchedUrl);
+			return "home";
 		} catch (NumberFormatException nfe) {
-			System.out.println();
+			model.addAttribute("matchedUrl", "wrong number format");
+			return "home";
 		}
-		return "home";
+	}
+	*/
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	public @ResponseBody String findPageById(@PathVariable String id, Model model) {
+		Integer idForLookUp = null;
+		try {
+			idForLookUp = Integer.parseInt(id);
+			String matchedUrl = idService.getUrlByTranslateId(Long.parseLong(id));
+			model.addAttribute("matchedUrl", matchedUrl);
+			return matchedUrl;
+		} catch (NumberFormatException nfe) {
+			model.addAttribute("matchedUrl", "wrong number format");
+			return "URL was not found";
+		}
 	}
 	
 	@RequestMapping(value="idHarvester")

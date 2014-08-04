@@ -56,6 +56,15 @@ public class IdService {
 		
 	}
 	
+	public String getUrlByTranslateId(Long tId) {
+		Page matchedPage = idDao.getPageByTranslateId(tId);
+		if (matchedPage != null) {
+			return matchedPage.getUrl();
+		} else {
+			return "URL was not found!";
+		}
+	}
+	
 /*	
 	@Scheduled(fixedDelay=3000)
 	public void doSmth() {

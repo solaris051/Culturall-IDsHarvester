@@ -4,7 +4,7 @@
 	<h1>DB persistence Tester</h1>
  
 	<h2>Persisting Entity...</h2>
-	${arg}
+	${matchedUrl}
  
 </body>
 </html>

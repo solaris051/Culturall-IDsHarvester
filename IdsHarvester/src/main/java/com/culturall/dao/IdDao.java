@@ -1,8 +1,9 @@
 package com.culturall.dao;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,53 +38,26 @@ public class IdDao {
 
 	public void persistPages (Set<Page> pageSet) {
 		Session session = this.getSession();
-		
 		for (Page p: pageSet) {
 			session.save(p);
 		}
+		session.close();
 	}
 	
-	//obsolete version
-/*	
- 	public void persistIdsFromPage (Set<String> translateIds, String url) {
-		Page page = new Page();
-		page.setUrl(url);
-		
-		Set<TranslateId> idSet = new HashSet<TranslateId>();
-		for (String trId: translateIds) {
-			TranslateId itTrId = new TranslateId();
-			itTrId.setPage(page);
-			itTrId.setText("def. Text");
-			itTrId.setTransId(Long.parseLong(trId));
-			idSet.add(itTrId);
-		}
-		page.setIds(idSet);
-		this.getSession().save(page);
-	}
-*/	
-/*	
-	//for test purposes
-	private void writeToDb() {
-		Page pageMatch = null;
-		
-		Page page = new Page();
-		page.setScreenShot("some screenshot");
-		page.setUrl("www.culturall.com");
-	
-		TranslateId tId = new TranslateId();
-		tId.setText("bla-bla");
-		tId.setTransId(123456L);
-		
-		tId.setPage(page);
-
-		page.getIds().add(tId);
-		
-		System.out.println("size is " + page.getIds().size());
-		
-
-		
+	public Page getPageByTranslateId (Long translateId) {
 		Session session = this.getSession();
-		session.save(page);		
+		Query query = session.getNamedQuery("getTranslateIdById");
+		query.setLong("tId", translateId);
+		ArrayList<TranslateId> matchedIds = (ArrayList<TranslateId>) query.list();
+		
+		if (matchedIds.size() > 0) {
+			Long pageId = matchedIds.get(0).getPage().getPageId();
+			System.out.println("pageId is: " + pageId);
+			query.setLong("id", pageId);
+			Page matchedPage = (Page) query.uniqueResult();
+			return matchedPage;
+		} else {
+			return null;
+		}
 	}
-	*/
 }
