@@ -53,6 +53,7 @@ public class IdDao {
 		if (matchedIds.size() > 0) {
 			Long pageId = matchedIds.get(0).getPage().getPageId();
 			System.out.println("pageId is: " + pageId);
+			query = session.getNamedQuery(Page.findPageById);
 			query.setLong("id", pageId);
 			Page matchedPage = (Page) query.uniqueResult();
 			return matchedPage;
