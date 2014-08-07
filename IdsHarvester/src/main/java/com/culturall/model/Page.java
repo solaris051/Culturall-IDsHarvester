@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -56,6 +57,7 @@ public class Page {
 	}
 
 	@OneToMany(mappedBy="page", cascade=CascadeType.ALL)
+	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
 	public Set<TranslateId> getIds() {
 		return ids;
 	}

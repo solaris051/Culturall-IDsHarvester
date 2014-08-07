@@ -3,6 +3,7 @@ package com.culturall.dao;
 import java.util.ArrayList;
 import java.util.Set;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,11 +38,20 @@ public class IdDao {
 	}
 
 	public void persistPages (Set<Page> pageSet) {
-		Session session = this.getSession();
+		
+ 		Session session = this.getSession();
+/*			
+		String dropQuery = "DELETE FROM Page";
+		Query query = session.createQuery(dropQuery);
+		query.executeUpdate();
+		
+*/
+			
 		for (Page p: pageSet) {
 			session.save(p);
 		}
 		session.close();
+	
 	}
 	
 	public Page getPageByTranslateId (Long translateId) {

@@ -21,6 +21,8 @@ public class IdService {
 	}
 	
 	public void harvestIds () {
+		//idDao.persistPages(null);
+		
 		System.out.println("in harvestIds method");
 		Harvester harvester = new Harvester();
 		Set<String> urlSet = harvester.getPageSet();
